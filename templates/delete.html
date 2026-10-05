@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}
+<title>學生資料管理系統-刪除學生資料</title>
+{% endblock  %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 text-primary mb-0">刪除學生資料</h1>
+    <a href="{% url 'index' %}" class="btn btn-outline-primary btn-sm">
+        <i class="bi bi-arrow-left me-1"></i>回首頁
+    </a>
+</div>
+<div class="alert alert-danger d-flex align-items-center" role="alert">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+    確定要刪除以下這筆資料嗎？刪除後將無法復原！
+</div>
+<div class="card">
+    <div class="card-body p-4">
+        <form action="{% url 'delete' obj_data.cid %}" method="POST">
+            {% csrf_token %}
+            <table class="table table-borderless mb-4">
+                <tr>
+                    <th class="w-25">姓名</th><td>{{ obj_data.cname }}</td>
+                </tr>
+                <tr>
+                    <th>性別</th>
+                    <td>
+                        {% if obj_data.csex == "M" %}
+                            <span class="badge bg-primary">男</span>
+                        {% endif %}
+                        {% if obj_data.csex == "F" %}
+                            <span class="badge bg-danger">女</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>生日</th><td>{{ obj_data.cbirthday|date:'Y-m-d' }}</td>
+                </tr>
+                <tr>
+                    <th>信箱</th><td>{{ obj_data.cemail }}</td>
+                </tr>
+                <tr>
+                    <th>電話</th><td>{{ obj_data.cphone }}</td>
+                </tr>
+                <tr>
+                    <th>地址</th><td>{{ obj_data.caddr }}</td>
+                </tr>
+            </table>
+            <div class="text-center">
+                <button type="submit" name="button" id="button" class="btn btn-danger px-4" onclick="return doubleCheck();">
+                    <i class="bi bi-trash me-1"></i>刪除
+                </button>
+                <a href="{% url 'index' %}" class="btn btn-outline-secondary px-4">取消</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+// 透過javaScript
+function doubleCheck() {
+    return confirm("確定要刪除這筆資料嗎？\n刪除後將無法復原！\n");
+}
+
+</script>
+{% endblock  %}

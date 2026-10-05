@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+<title>學生資料管理系統-搜尋結果</title>
+{% endblock  %}
+
+{% block content %}
+<h1 class="h3 text-primary mb-4">搜尋結果</h1>
+{% if errormessage %}
+<div class="alert alert-warning">{{ errormessage }}</div>
+{% endif %}
+<div class="row row-cols-1 row-cols-md-2 g-3">
+    {% for data in resultList %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">{{ data.cname }}</h5>
+                <p class="card-text mb-1">學號: {{ data.cid }}</p>
+                <p class="card-text mb-1">性別: {{ data.csex }}</p>
+                <p class="card-text mb-1">生日: {{ data.cbirthday }}</p>
+                <p class="card-text mb-1">郵件: {{ data.cemail }}</p>
+                <p class="card-text mb-1">電話: {{ data.cphone }}</p>
+                <p class="card-text mb-0">地址: {{ data.caddr }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock  %}

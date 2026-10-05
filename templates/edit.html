@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}
+<title>學生資料管理系統-修改學生資料</title>
+{% endblock  %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 text-primary mb-0">修改學生資料</h1>
+    <a href="{% url 'index' %}" class="btn btn-outline-primary btn-sm">
+        <i class="bi bi-arrow-left me-1"></i>回首頁
+    </a>
+</div>
+<div class="card">
+    <div class="card-body p-4">
+        <form action="{% url 'edit' obj_data.cid %}" method="POST">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <label for="cname" class="col-sm-2 col-form-label">姓名 <span class="text-danger">*</span></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="cname" name="cname" required placeholder="請輸入姓名" value="{{ obj_data.cname }}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">性別 <span class="text-danger">*</span></label>
+                <div class="col-sm-10 pt-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="csex_m" name="csex" value="M" {% if obj_data.csex == "M" %}checked{% endif %}>
+                        <label class="form-check-label" for="csex_m">男</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="csex_f" name="csex" value="F" {% if obj_data.csex == "F" %}checked{% endif %}>
+                        <label class="form-check-label" for="csex_f">女</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="cbirthday" class="col-sm-2 col-form-label">生日 <span class="text-danger">*</span></label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" id="cbirthday" name="cbirthday" required value="{{ obj_data.cbirthday|date:'Y-m-d' }}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="cemail" class="col-sm-2 col-form-label">信箱 <span class="text-danger">*</span></label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="cemail" name="cemail" required placeholder="請輸入mail" value="{{ obj_data.cemail }}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="cphone" class="col-sm-2 col-form-label">電話</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="cphone" name="cphone" value="{{ obj_data.cphone }}">
+                </div>
+            </div>
+            <div class="row mb-4">
+                <label for="caddr" class="col-sm-2 col-form-label">地址</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="caddr" name="caddr" value="{{ obj_data.caddr }}">
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" name="button" id="button" class="btn btn-primary px-4">修改</button>
+                <button type="reset" name="button2" id="button2" class="btn btn-outline-secondary px-4">清除</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock  %}
